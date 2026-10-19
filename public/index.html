@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<title>مدير المشاريع</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- شاشة الدخول -->
+<div id="login-screen" class="overlay">
+  <div class="login-box">
+    <h1>🔐 الدخول</h1>
+    <input id="pass-input" type="password" placeholder="كلمة المرور" />
+    <button id="login-btn">دخول</button>
+    <p class="hint">افتراضية: <code>1234</code></p>
+    <p id="login-err" class="err"></p>
+  </div>
+</div>
+
+<!-- التطبيق -->
+<div id="app" class="hidden">
+  <header>
+    <h1>⚙️ مدير المشاريع</h1>
+    <div class="status-dot" id="status-dot"></div>
+  </header>
+
+  <div class="tabs">
+    <button class="tab active" data-tab="files">📁 الملفات</button>
+    <button class="tab" data-tab="console">🖥️ الكونسل</button>
+    <button class="tab" data-tab="settings">⚙️ الإعدادات</button>
+  </div>
+
+  <!-- تبويب الملفات -->
+  <section id="tab-files" class="tab-content active">
+    <div class="toolbar">
+      <button id="btn-upload">📤 رفع ملف</button>
+      <button id="btn-mkdir">📂 مجلد جديد</button>
+      <span class="path-breadcrumb" id="breadcrumb">/</span>
+    </div>
+    <input type="file" id="file-input" hidden />
+    <ul id="file-list" class="file-list"></ul>
+
+    <!-- محرر -->
+    <div id="editor-wrap" class="hidden">
+      <div class="editor-header">
+        <span id="editor-filename"></span>
+        <div>
+          <button id="btn-save-file">💾 حفظ</button>
+          <button id="btn-close-editor">✖ إغلاق</button>
+        </div>
+      </div>
+      <textarea id="editor" spellcheck="false"></textarea>
+    </div>
+  </section>
+
+  <!-- تبويب الكونسل -->
+  <section id="tab-console" class="tab-content">
+    <div class="toolbar">
+      <button id="btn-start" class="btn-green">▶ تشغيل</button>
+      <button id="btn-stop" class="btn-red">⏹ إيقاف</button>
+      <button id="btn-restart" class="btn-yellow">🔄 ريستارت</button>
+      <button id="btn-clear">🧹 مسح</button>
+    </div>
+    <pre id="console-output"></pre>
+  </section>
+
+  <!-- تبويب الإعدادات -->
+  <section id="tab-settings" class="tab-content">
+    <div class="settings-box">
+      <label for="main-file-input">📌 اسم الملف الرئيسي:</label>
+      <input id="main-file-input" type="text" placeholder="مثال: index.js" />
+      <button id="btn-save-settings">💾 حفظ الإعدادات</button>
+      <p class="hint">سيتم تشغيل هذا الملف عند الضغط على "تشغيل"</p>
+    </div>
+  </section>
+</div>
+
+<script src="/socket.io/socket.io.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
